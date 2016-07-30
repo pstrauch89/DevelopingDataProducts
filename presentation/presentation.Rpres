@@ -1,0 +1,45 @@
+Presentation for Automobile catalog filter
+========================================================
+author: Peter Štrauch   
+date: `r format(Sys.time(), "%a %d.%b.%Y, %H:%M:%S CEST")`
+transition: rotate 
+
+
+The goal of this presentation
+========================================================
+- This is part of the course project for "Developing Data Products" course. 
+
+- The presentation describes the shiny application "Automobile catalog filter".
+
+
+
+The Application
+========================================================
+Application **Automobile catalog filter** is based on 'mtcars' database, part of [datasets](https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/mtcars.html) package.
+
+The application allows to *filter cars by parameters (hp, cyl)* and to check correlation between weight and miles/gallon.
+
+You can adjust *horsepower range* and *number of cylinders* using control panel located on the left side. The result is shown in the main panel (on the right side of the page), which include two tabs with *plot* and *data*. Also filtered dataset can be downloaded using *download button*.
+
+
+Filtering data
+========================================================
+The application is based on interactive filter; filtered data is shown in the table and plot. Example of table is below:
+```{r processing data, echo=FALSE}
+library(dplyr)
+data <- data.frame(mtcars)
+data$name <- rownames(data)
+data <- cbind(data[12], data[,1:11])
+data <- data[, c(1,2,3,4,5,7)]
+```
+
+```{r filtering data}
+arrange(filter(data, hp >= 100,hp <= 200, cyl == 4|cyl == 6), name)
+```
+
+
+References
+========================================================
+Source code for the project is available on the [GitHub](https://github.com/pstrauch89/DevelopingDataProducts).
+
+The presentation for the project can be found on the [RPubs](http://rpubs.com/Frankie/DevelopingDataProduct).
